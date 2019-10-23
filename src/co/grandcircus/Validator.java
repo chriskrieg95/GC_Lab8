@@ -63,7 +63,7 @@ public class Validator {
 //				System.out.println("The number must be at least " + min);
 			} else if (number > max) {
 				isValid = false;
-				System.out.println("hat student does not exist. Please try again.");
+				System.out.println("That student does not exist. Please try again.");
 //				System.out.println("The number must not be larger than " + max);
 			} else {
 				isValid = true;
