@@ -1,5 +1,7 @@
 package co.grandcircus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class StudentProfileApp {
@@ -12,12 +14,13 @@ public class StudentProfileApp {
 				"Topeka", "Dallas", "San Diego", "Tokyo" };
 		String[] favFood = { "tacos", "meatballs", "pizza", "spaghetti", "quinoa", "sushi", "microchips", "data",
 				"private data", "hamburgers" };
+		ArrayList<String> arr = new ArrayList<>(Arrays.asList("hometown", "food"));
 
 		int userInput = 0;
 		String data = "";
 		String cont = "yes";
 
-		while (cont.equals("yes")) {
+		while (cont.equalsIgnoreCase("yes")) {
 			// your code should start here!
 			userInput = Validator.getInt(scan,
 					"Welcome to our Java class. Which student would you like to learn more about? (enter a number 1-10): ",
@@ -25,13 +28,17 @@ public class StudentProfileApp {
 			String prompt = "Student " + userInput + " is " + names[userInput - 1] + "."
 					+ " What would you like to know about " + names[userInput - 1] + "? (enter hometown or food): ";
 			data = Validator.getString(scan, prompt);
-			if (data.equalsIgnoreCase("hometown") || data.equalsIgnoreCase("food")) {
-				cont = searchDatabasesAndGetUserResponse(scan, data, userInput, hometown, favFood, names);
-			} else {
-				data = Validator.getString(scan,
-						"That data does not exist. Please try again. (enter hometown or food): ");
-				cont = searchDatabasesAndGetUserResponse(scan, data, userInput, hometown, favFood, names);
+			
+				if (data.equalsIgnoreCase("hometown") || data.equalsIgnoreCase("food")) {
+					cont = searchDatabasesAndGetUserResponse(scan, data, userInput, hometown, favFood, names);
+				} else {
+					while(!arr.contains(data)) {
+						data = Validator.getString(scan,
+								"That data does not exist. Please try again. (enter hometown or food): ");
+						cont = searchDatabasesAndGetUserResponse(scan, data, userInput, hometown, favFood, names);
+					}
 			}
+				
 
 		}
 
